@@ -7,7 +7,8 @@ import os
 import matplotlib.pyplot as plt
 
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(device)
 
 # CONSTANTS
 OPTIMIZE_NUMBER = 5
@@ -22,9 +23,9 @@ OPTIMIZER_COLORS = ["#D50000", "#2962FF", "#FFD600", "#00C853", "#3E2723"]
 optimizer_options = SDG;
 
 # NETWORK PARAMETERS
-n_epochs = 5
-log_interval = 10
+n_epochs = 25
 random_seed = 1
+BATCH_SIZE_OPTIMIZER = 64
 torch.backends.cudnn.enabled = False
 torch.manual_seed(random_seed)
 
@@ -75,21 +76,23 @@ def train(epoch, network, optimizer, tl):
     loss = F.cross_entropy(output, target)
     loss.backward()
     optimizer.step()
+    log_interval = 10 * (n_epochs/BATCH_SIZE_OPTIMIZER) if optimizer_options != 0 else 5000
     if batch_idx % log_interval == 0:
-      print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-        epoch, batch_idx * len(data), len(train_loader.dataset),
-        100. * batch_idx / len(train_loader), loss.item()))
+      # print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+      #   epoch, batch_idx * len(data), len(train_loader.dataset),
+      #   100. * batch_idx / len(train_loader), loss.item()))
+      batch_idx_size = BATCH_SIZE_OPTIMIZER if optimizer_options != 0 else 1
       temp_loss = loss.item() if loss.item() < 3 else 3
       train_losses.append(temp_loss)
       train_counter.append(
-        (batch_idx*64) + ((epoch-1)*len(train_loader.dataset)))
-      train_all[optimizer_options].append(temp_loss)
-      train_all_counter[optimizer_options].append((batch_idx*64) + ((epoch-1)*len(train_loader.dataset)))
+        (batch_idx*batch_idx_size) + ((epoch-1)*len(train_loader.dataset)))
+      # train_all[optimizer_options].append(temp_loss)
+      # train_all_counter[optimizer_options].append((batch_idx*batch_idx_size) + ((epoch-1)*len(train_loader.dataset)))
 
       torch.save(network.state_dict(), './results/model.pth')
       torch.save(optimizer.state_dict(), './results/optimizer.pth')
 
-def test(network, tl):
+def test(network, tl, nb_epoch=0):
   test_loader = tl
   network.eval()
   test_loss = 0
@@ -103,7 +106,10 @@ def test(network, tl):
       correct += pred.eq(target.data.view_as(pred)).sum()
   test_loss /= len(test_loader.dataset)
   test_losses.append(test_loss)
-  print('\nTest set: Avg. loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
+
+  train_all[optimizer_options].append(test_loss)
+
+  print(str(nb_epoch) + ' Test set: Avg. loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)'.format(
     test_loss, correct, len(test_loader.dataset),
     100. * correct / len(test_loader.dataset)))
 
@@ -119,11 +125,12 @@ def plotLoss(test_counter):
 
 def plotAll():
     for i in range(0, OPTIMIZE_NUMBER):
-      plt.plot(train_all_counter[i], train_all[i], color=OPTIMIZER_COLORS[i])
+      print(OPTIMIZER_STR[i] + " :" + train_all[i])
+      plt.plot([i for i in range(n_epochs+1)], train_all[i], color=OPTIMIZER_COLORS[i])
     plt.legend(OPTIMIZER_STR, loc='upper right')
     plt.xlabel('Nombre d\'exemple d\'entrainement')
     plt.ylabel('Cross entropy loss')
-    plt.title("Comparaisons de différents algorithmes d'optimisation")
+    plt.title("Comparaisons de différents algorithmes d'optimisation\n epoch="+str(n_epochs) + " batch_size="+str(BATCH_SIZE_OPTIMIZER))
     plt.show()
       
 
@@ -140,7 +147,7 @@ def main():
 
   # Stochastic Gradient Descent
   if optimizer_options == SDG:
-    optimizer = optim.SGD(network.parameters(), lr=0.1)
+    optimizer = optim.SGD(network.parameters(), lr=0.01)
   # Mini-Batch
   elif optimizer_options == MINI_BATCH:
     optimizer = optim.SGD(network.parameters(), lr=0.1)
@@ -157,7 +164,7 @@ def main():
   test(network, test_loader)
   for epoch in range(1, n_epochs + 1):
     train(epoch, network, optimizer, train_loader)
-    test(network, test_loader)
+    test(network, test_loader, epoch)
   # plotLoss(test_counter)
 
 
@@ -166,24 +173,24 @@ if __name__ == '__main__':
     optimizer_options = i
     # Stochastic Gradient Descent
     if optimizer_options == SDG:
-      batch_size_train = 64
+      batch_size_train = 1
       batch_size_test = 1000
     # Mini-Batch
     elif optimizer_options == MINI_BATCH:
-      batch_size_train = 64
+      batch_size_train = BATCH_SIZE_OPTIMIZER
       batch_size_test = 1000
     # Stochastic Gradient Descent avec mometum
     elif optimizer_options == SDG_MOMEMTUM:
-      batch_size_train = 64
+      batch_size_train = BATCH_SIZE_OPTIMIZER
       batch_size_test = 1000
     # Adaptive Gradient Descent
     elif optimizer_options == ADA_GRAD:
-      batch_size_train = 64
+      batch_size_train = BATCH_SIZE_OPTIMIZER
       batch_size_test = 1000
     # RMSProp
     else :# optimizer_options == RMS_PROP:
-      batch_size_train = 64
+      batch_size_train = BATCH_SIZE_OPTIMIZER
       batch_size_test = 1000
-
+    print("\n"+OPTIMIZER_STR[i])
     main()
   plotAll()  
