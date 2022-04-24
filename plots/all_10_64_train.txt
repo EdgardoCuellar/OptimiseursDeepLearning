@@ -1,0 +1,75 @@
+Stochastic Gradient Descent
+0 Test set: Avg. loss: 2.3304, Accuracy: 6747/60000 (11%)
+1 Test set: Avg. loss: 0.2200, Accuracy: 56521/60000 (94%)
+2 Test set: Avg. loss: 0.4294, Accuracy: 53089/60000 (88%)
+3 Test set: Avg. loss: nan, Accuracy: 5923/60000 (10%)
+4 Test set: Avg. loss: nan, Accuracy: 5923/60000 (10%)
+5 Test set: Avg. loss: nan, Accuracy: 5923/60000 (10%)
+6 Test set: Avg. loss: nan, Accuracy: 5923/60000 (10%)
+7 Test set: Avg. loss: nan, Accuracy: 5923/60000 (10%)
+8 Test set: Avg. loss: nan, Accuracy: 5923/60000 (10%)
+9 Test set: Avg. loss: nan, Accuracy: 5923/60000 (10%)
+10 Test set: Avg. loss: nan, Accuracy: 5923/60000 (10%)
+
+Mini Batch
+0 Test set: Avg. loss: 2.3086, Accuracy: 5679/60000 (9%)
+1 Test set: Avg. loss: 0.0906, Accuracy: 58373/60000 (97%)
+2 Test set: Avg. loss: 0.0734, Accuracy: 58633/60000 (98%)
+3 Test set: Avg. loss: 0.0657, Accuracy: 58842/60000 (98%)
+4 Test set: Avg. loss: 0.0495, Accuracy: 59130/60000 (99%)
+5 Test set: Avg. loss: 0.0502, Accuracy: 59048/60000 (98%)
+6 Test set: Avg. loss: 0.0437, Accuracy: 59210/60000 (99%)
+7 Test set: Avg. loss: 0.0420, Accuracy: 59247/60000 (99%)
+8 Test set: Avg. loss: 0.0400, Accuracy: 59267/60000 (99%)
+9 Test set: Avg. loss: 0.0377, Accuracy: 59321/60000 (99%)
+10 Test set: Avg. loss: 0.0346, Accuracy: 59364/60000 (99%)
+
+SGD avec momentum
+0 Test set: Avg. loss: 2.3099, Accuracy: 5953/60000 (10%)
+1 Test set: Avg. loss: 0.0973, Accuracy: 58240/60000 (97%)
+2 Test set: Avg. loss: 0.1006, Accuracy: 58144/60000 (97%)
+3 Test set: Avg. loss: 0.0623, Accuracy: 58878/60000 (98%)
+4 Test set: Avg. loss: 0.0695, Accuracy: 58813/60000 (98%)
+5 Test set: Avg. loss: 0.0601, Accuracy: 58927/60000 (98%)
+6 Test set: Avg. loss: 0.0509, Accuracy: 59109/60000 (99%)
+7 Test set: Avg. loss: 0.0550, Accuracy: 58989/60000 (98%)
+8 Test set: Avg. loss: 0.0533, Accuracy: 59071/60000 (98%)
+9 Test set: Avg. loss: 0.0464, Accuracy: 59152/60000 (99%)
+10 Test set: Avg. loss: 0.0471, Accuracy: 59156/60000 (99%)
+
+Adaptive Gradient Descent
+0 Test set: Avg. loss: 2.3012, Accuracy: 7692/60000 (13%)
+1 Test set: Avg. loss: 0.1381, Accuracy: 57514/60000 (96%)
+2 Test set: Avg. loss: 0.1095, Accuracy: 58078/60000 (97%)
+3 Test set: Avg. loss: 0.0985, Accuracy: 58239/60000 (97%)
+4 Test set: Avg. loss: 0.0880, Accuracy: 58452/60000 (97%)
+5 Test set: Avg. loss: 0.0831, Accuracy: 58521/60000 (98%)
+6 Test set: Avg. loss: 0.0788, Accuracy: 58586/60000 (98%)
+7 Test set: Avg. loss: 0.0743, Accuracy: 58662/60000 (98%)
+8 Test set: Avg. loss: 0.0720, Accuracy: 58708/60000 (98%)
+9 Test set: Avg. loss: 0.0700, Accuracy: 58724/60000 (98%)
+10 Test set: Avg. loss: 0.0681, Accuracy: 58775/60000 (98%)
+
+RMSProp
+0 Test set: Avg. loss: 2.3093, Accuracy: 8311/60000 (14%)
+1 Test set: Avg. loss: 0.1113, Accuracy: 57901/60000 (97%)
+2 Test set: Avg. loss: 0.0810, Accuracy: 58521/60000 (98%)
+3 Test set: Avg. loss: 0.0667, Accuracy: 58778/60000 (98%)
+4 Test set: Avg. loss: 0.0584, Accuracy: 58916/60000 (98%)
+5 Test set: Avg. loss: 0.0576, Accuracy: 58940/60000 (98%)
+6 Test set: Avg. loss: 0.0548, Accuracy: 58979/60000 (98%)
+7 Test set: Avg. loss: 0.0460, Accuracy: 59136/60000 (99%)
+8 Test set: Avg. loss: 0.0410, Accuracy: 59229/60000 (99%)
+9 Test set: Avg. loss: 0.0399, Accuracy: 59256/60000 (99%)
+10 Test set: Avg. loss: 0.0375, Accuracy: 59317/60000 (99%)
+[1410.9272332191467, 325.5799369812012, 319.5950469970703, 323.4821608066559, 307.00171422958374]
+Stochastic Gradient Descent
+[2.3304083821614583, 0.21996390686035155, 0.4293910502115885, nan, nan, nan, nan, nan, nan, nan, nan]
+Mini Batch
+[2.3086355224609374, 0.09059473870595296, 0.07335593681335449, 0.06566746082305908, 0.04950998751322428, 0.05022355365753174, 0.04374580221176148, 0.042036023394266764, 0.03995663906733195, 0.03774702898661295, 0.03464774099985758]
+SGD avec momentum
+[2.309925695800781, 0.09733750495910644, 0.10058257395426433, 0.06227312831878662, 0.06947573534647623, 0.06009252106348673, 0.0509458690961202, 0.055028342119852705, 0.05330703932444254, 0.046403241602579755, 0.047060351181030274]
+Adaptive Gradient Descent
+[2.3011867350260418, 0.13812613932291667, 0.10951876118977864, 0.09847358881632487, 0.08797846323649089, 0.08311836414337158, 0.07880859711964926, 0.07430949281056722, 0.07198372472127279, 0.06998743699391682, 0.06805216096242268]
+RMSProp
+[2.309294836425781, 0.11128777325948079, 0.08103723646799724, 0.06672785860697428, 0.05842655569712321, 0.05762320537567139, 0.05478051637013753, 0.04602484985987346, 0.040992725054423015, 0.03989561363855998, 0.03748923768997192]

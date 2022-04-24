@@ -4,6 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import os
+import time
 import matplotlib.pyplot as plt
 
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
@@ -26,6 +27,7 @@ optimizer_options = SDG;
 n_epochs = 25
 random_seed = 1
 BATCH_SIZE_OPTIMIZER = 64
+MNIST_TRAIN = True;
 torch.backends.cudnn.enabled = False
 torch.manual_seed(random_seed)
 
@@ -58,7 +60,7 @@ class Net(nn.Module):
 
 def loadMNIST(batch_size):
   return torch.utils.data.DataLoader(
-    torchvision.datasets.MNIST('/files/', train=False, download=True,
+    torchvision.datasets.MNIST('/files/', train=MNIST_TRAIN, download=True,
                           transform=torchvision.transforms.Compose([
                             torchvision.transforms.ToTensor(),
                             torchvision.transforms.Normalize(
@@ -125,7 +127,8 @@ def plotLoss(test_counter):
 
 def plotAll():
     for i in range(0, OPTIMIZE_NUMBER):
-      print(OPTIMIZER_STR[i] + " :" + train_all[i])
+      print(OPTIMIZER_STR[i])
+      print(train_all[i])
       plt.plot([i for i in range(n_epochs+1)], train_all[i], color=OPTIMIZER_COLORS[i])
     plt.legend(OPTIMIZER_STR, loc='upper right')
     plt.xlabel('Nombre d\'exemple d\'entrainement')
@@ -169,7 +172,9 @@ def main():
 
 
 if __name__ == '__main__':
+  timers = []
   for i in range(0, OPTIMIZE_NUMBER):
+    t0 = time.time()
     optimizer_options = i
     # Stochastic Gradient Descent
     if optimizer_options == SDG:
@@ -193,4 +198,6 @@ if __name__ == '__main__':
       batch_size_test = 1000
     print("\n"+OPTIMIZER_STR[i])
     main()
+    timers.append(time.time() - t0)
+  print(timers)
   plotAll()  
