@@ -27,7 +27,7 @@ optimizer_options = SDG;
 n_epochs = 25
 random_seed = 1
 BATCH_SIZE_OPTIMIZER = 64
-MNIST_TRAIN = True;
+MNIST_TRAIN = False;
 torch.backends.cudnn.enabled = False
 torch.manual_seed(random_seed)
 
