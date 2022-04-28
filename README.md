@@ -4,6 +4,10 @@
 L'optimisation est la base du deep learning, l'optimisation faisant référence à la minimisation du loss d'un modèle, le loss nous indiquant l'efficacité de notre modèle.
 Dans cet article, nous analyserons les différents algorithmes d'optimisations permettant d'améliorer l'efficacité de notre modèle de reconnaissance de text manuscrit avec le jeu de données MNIST. Les cinq principaux algorithmes étudiés ici seront le Stochastic Gradient Descent, Mini Batch, SGD avec momentum, et l'Adaptive Gradient Descent, et le RMSProp.
 
+### Article ayant grandement aidé
+- https://nextjournal.com/gkoehler/pytorch-mnist
+- https://medium.com/@nutanbhogendrasharma/pytorch-convolutional-neural-network-with-mnist-dataset-4e8a4265e118
+
 ### Libs:
 - Pytorch
 - Matplotlib
