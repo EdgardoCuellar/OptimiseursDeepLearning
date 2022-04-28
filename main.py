@@ -18,13 +18,13 @@ MINI_BATCH = 1
 SDG_MOMEMTUM = 2
 ADA_GRAD = 3
 RMS_PROP = 4
-OPTIMIZER_STR = ["Stochastic Gradient Descent", "Mini Batch", "SGD avec momentum", "Adaptive Gradient Descent", "RMSProp"]
+OPTIMIZER_STR = ["Stochastic Gradient Descent", "Mini Batch", "Mini Batch momentum", "Adaptive Gradient Descent", "RMSProp"]
 OPTIMIZER_COLORS = ["#D50000", "#2962FF", "#FFD600", "#00C853", "#3E2723"]
 # OPTIONSSSSSSSSSSSSSSSSSSSSS
 optimizer_options = SDG;
 
 # NETWORK PARAMETERS
-n_epochs = 25
+n_epochs = 10
 random_seed = 1
 BATCH_SIZE_OPTIMIZER = 64
 MNIST_TRAIN = False;
